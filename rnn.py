@@ -99,6 +99,6 @@ class Finisher():
 		self.model.fit(X,y, batch_size=32, epochs = 30, callbacks = callbacks_list,validation_split = 0.2, verbose=2)
 		self.model.load_weights(file_path)
 		y_pred = self.model.predict([t],batch_size=1024, verbose=1)
-		c = pd.read_csv("submission.csv")
+		c = pd.read_csv("/data/sample_submission.csv")
 		c[classes] = y_pred
 		return c
