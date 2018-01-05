@@ -8,42 +8,46 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 #definitions
 list_classes = ["toxic", "severe_toxic", "obscene", "threat", "insult", "identity_hate"]
-# vect = TfidfVectorizer(analyzer='char', ngram_range=(1,4), max_features=50000, min_df=2)
-word_vectorizer = TfidfVectorizer(
-    sublinear_tf=True,
-    strip_accents='unicode',
-    analyzer='word',
-    token_pattern=r'\w{1,}',
-    ngram_range=(1,1),
-    max_features=20000)
-char_vectorizer = TfidfVectorizer(
-    sublinear_tf=True,
-    strip_accents='unicode',
-    analyzer='char',
-    ngram_range=(1, 4),
-    max_features=20000)
+vect = TfidfVectorizer(analyzer='char', ngram_range=(1,4), max_features=50000, min_df=2)
+# word_vectorizer = TfidfVectorizer(
+#     sublinear_tf=True,
+#     strip_accents='unicode',
+#     analyzer='word',
+#     token_pattern=r'\w{1,}',
+#     ngram_range=(1,1),
+#     max_features=20000)
+# char_vectorizer = TfidfVectorizer(
+#     sublinear_tf=True,
+#     strip_accents='unicode',
+#     analyzer='char',
+#     ngram_range=(1, 4),
+#     max_features=20000)
 train_df = pd.read_csv('/data/train.csv').fillna("_na_")
 test_df = pd.read_csv('/data/test.csv').fillna("_na_")
 train_text = train_df['comment_text']
 test_text = test_df['comment_text']
 all_text = pd.concat([train_text, test_text])
-word_vectorizer.fit(all_text)
-char_vectorizer.fit(all_text)
+vect.fit(all_text)
+# word_vectorizer.fit(all_text)
+# char_vectorizer.fit(all_text)
 # vect.fit(x_train)
 class LRModel():
 	def __init__(self):
 		self.model = LogisticRegression(C=4.0, solver='sag' )
 	def run(self,X,y,X_te,full_X_te):
 		print("running lr model")
-		x_train_dtm_o = word_vectorizer.transform(X)
-		x_test_dtm_o = word_vectorizer.transform(X_te)
-		full_x_test_o = word_vectorizer.transform(full_X_te)
-		x_train_dtm_i = char_vectorizer.transform(X)
-		x_test_dtm_i = char_vectorizer.transform(X_te)
-		full_x_test_i = char_vectorizer.transform(full_X_te)
-		x_train_dtm = hstack((x_train_dtm_o, x_train_dtm_i))
-		x_test_dtm = hstack((x_test_dtm_o, x_test_dtm_i))
-		full_x_test = hstack((full_x_test_o, full_x_test_i))
+# 		x_train_dtm_o = word_vectorizer.transform(X)
+# 		x_test_dtm_o = word_vectorizer.transform(X_te)
+# 		full_x_test_o = word_vectorizer.transform(full_X_te)
+# 		x_train_dtm_i = char_vectorizer.transform(X)
+# 		x_test_dtm_i = char_vectorizer.transform(X_te)
+# 		full_x_test_i = char_vectorizer.transform(full_X_te)
+# 		x_train_dtm = hstack((x_train_dtm_o, x_train_dtm_i))
+# 		x_test_dtm = hstack((x_test_dtm_o, x_test_dtm_i))
+# 		full_x_test = hstack((full_x_test_o, full_x_test_i))
+		x_train_dtm = vect.transform(X)
+		x_test_dtm = vect.transform(X_te)
+		full_x_test = vect.transform(full_X_te)
 		submission = pd.read_csv("sample_submission.csv").head(x_test_dtm.shape[0])
 		sub2 = pd.read_csv("sample_submission.csv").head(full_x_test.shape[0])
 		for class_label in list_classes:
