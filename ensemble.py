@@ -1,6 +1,5 @@
 from init import LRModel#,Finisher
 from rnn import deepModel, Finisher
-from xgbclassifier import XClassifier
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import KFold
