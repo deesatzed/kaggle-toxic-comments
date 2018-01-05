@@ -11,7 +11,7 @@ from keras.layers import Dense, Dropout, Embedding, Conv1D, MaxPooling1D, BatchN
 from keras.optimizers import Adam
 from keras.callbacks import LearningRateScheduler, EarlyStopping, ModelCheckpoint
 #io
-train_df = pd.read_csv('train.csv')
+train_df = pd.read_csv('/data/train.csv')
 x_train = train_df.comment_text.fillna("_na_").values
 
 output_file = "submission.csv"
