@@ -34,4 +34,4 @@ class Ensemble():
             final_test[:,i*6:i*6+6] = np.mean(np.array(S_test), axis=0)
         return self.stacker.finish(np.expand_dims(S_train, axis=2), y[classes].values, np.expand_dims(final_test, axis=2))[:]
 go = Ensemble(5, Finisher((12,1)), [LRModel(), deepModel()])
-go.fit_predict(x_train, train_df, x_test).to_csv('try.csv', index=False)
+go.fit_predict(x_train, train_df, x_test).to_csv('/output/try.csv', index=False)
