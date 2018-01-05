@@ -48,8 +48,8 @@ class LRModel():
 		x_train_dtm = vect.transform(X)
 		x_test_dtm = vect.transform(X_te)
 		full_x_test = vect.transform(full_X_te)
-		submission = pd.read_csv("sample_submission.csv").head(x_test_dtm.shape[0])
-		sub2 = pd.read_csv("sample_submission.csv").head(full_x_test.shape[0])
+		submission = pd.read_csv("/data/sample_submission.csv").head(x_test_dtm.shape[0])
+		sub2 = pd.read_csv("/data/sample_submission.csv").head(full_x_test.shape[0])
 		for class_label in list_classes:
 			print('Training {}'.format(class_label))
 			self.model.fit(x_train_dtm, y[class_label].astype("int"))
