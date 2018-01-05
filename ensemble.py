@@ -4,8 +4,8 @@ from xgbclassifier import XClassifier
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import KFold
-train_df = pd.read_csv('train.csv')
-test_df = pd.read_csv('test.csv')
+train_df = pd.read_csv('/data/train.csv')
+test_df = pd.read_csv('/data/test.csv')
 x_train = train_df.comment_text.fillna("_na_").values
 x_test = test_df.comment_text.fillna("_na_").values
 classes = ["toxic", "severe_toxic", "obscene", "threat", "insult", "identity_hate"]
