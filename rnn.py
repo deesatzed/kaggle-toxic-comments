@@ -21,7 +21,7 @@ tokenizer.fit_on_texts(list(x_train))
 #Get embed matrix from embedfile
 def get_coefs(word,*arr): return word, np.asarray(arr, dtype='float32')
 embed_size = 100 # how big is each word vector
-EMBEDDING_FILE = 'glove.6B.100d.txt'
+EMBEDDING_FILE = '/data/glove.6B.100d.txt'
 embeddings_index = dict(get_coefs(*o.strip().split()) for o in open(EMBEDDING_FILE))
 all_embs = np.stack(embeddings_index.values())
 emb_mean,emb_std = all_embs.mean(), all_embs.std()
