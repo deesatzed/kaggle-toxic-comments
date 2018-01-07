@@ -30,8 +30,14 @@ x_test = sequence.pad_sequences(test_tokenized, maxlen=150)
 y = train[classes].values
 embed_size = 300 # how big is each word vector
 
-def get_coefs(word,*arr): return word, np.asarray(arr, dtype='float32')
-embeddings_index = dict(get_coefs(*o.strip().split()) for o in open(EMBEDDING_FILE))
+embeddings_index = {}
+    f = open(EMBEDDING_FILE)
+    for line in f:
+        values = line.split()
+        word = ' '.join(values[:-300])
+        coefs = np.asarray(values[-300:], dtype='float32')
+        embeddings_index[word] = coefs.reshape(-1)
+    f.close()
 all_embs = np.stack(embeddings_index.values())
 emb_mean,emb_std = all_embs.mean(), all_embs.std()
 word_index = tokenizer.word_index
