@@ -10,7 +10,7 @@ from keras.optimizers import Adam
 from keras.preprocessing import text, sequence
 from keras.callbacks import LearningRateScheduler, EarlyStopping, ModelCheckpoint
 
-EMBEDDING_FILE = '/out/data/glove.820B.300d.txt'
+EMBEDDING_FILE = '/out/data/glove.840B.300d.txt'
 train_file = "/data/train.csv"
 test_file = "/data/test.csv"
 classes = ["toxic", "severe_toxic", "obscene", "threat", "insult", "identity_hate"]
