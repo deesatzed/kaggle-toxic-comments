@@ -62,10 +62,10 @@ model.add(Dense(6, activation='sigmoid'))
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=["accuracy"])
 file_path="weights_base.best.hdf5"
 checkpoint = ModelCheckpoint(file_path, monitor='val_loss', verbose=2, save_best_only=True, mode='min')
-early = EarlyStopping(monitor="val_loss", mode="min", patience=5)
+early = EarlyStopping(monitor="val_loss", mode="min", patience=2)
 
 callbacks_list = [checkpoint, early]
-model.fit(x_train,y, batch_size=32, epochs = 30, validation_split = 0.1, callbacks = callbacks_list, verbose=2)
+model.fit(x_train,y, batch_size=32, epochs = 3, validation_split = 0.1, callbacks = callbacks_list, verbose=2)
 model.load_weights(file_path)
 
 y_test = model.predict([x_test],batch_size=1024, verbose=1)
