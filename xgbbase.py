@@ -142,5 +142,5 @@ for i, j in enumerate(col):
 subm = pd.read_csv('/data/sample_submission.csv')    
 submid = pd.DataFrame({'id': subm["id"]})
 submission = pd.concat([submid, pd.DataFrame(preds, columns = col)], axis=1)
-submission.to_csv('xgb.csv', index=False)
+submission.to_csv('/output/xgb.csv', index=False)
     
