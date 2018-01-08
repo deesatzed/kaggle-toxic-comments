@@ -40,9 +40,9 @@ comments_test = transform_com.transform(test['comment_text'])
 gc.collect()'''
 
 #Using the tokenize function from Jeremy's kernel
-import re, string
-re_tok = re.compile(f'([{string.punctuation}“”¨«»®´·º½¾¿¡§£₤‘’])')
-def tokenize(s): return re_tok.sub(r' \1 ', s).split()
+# import re, string
+# re_tok = re.compile(f'([{string.punctuation}“”¨«»®´·º½¾¿¡§£₤‘’])')
+# def tokenize(s): return re_tok.sub(r' \1 ', s).split()
 
 # transform_com = TfidfVectorizer(ngram_range=(1,2), tokenizer=tokenize,
 #                min_df=3, max_df=0.9, strip_accents='unicode', use_idf=1,
