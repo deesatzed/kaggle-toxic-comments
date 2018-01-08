@@ -71,6 +71,6 @@ model.load_weights(file_path)
 y_test = model.predict([x_test],batch_size=1024, verbose=1)
 
 
-sample_submission = pd.read_csv("/data/submission.csv")
+sample_submission = pd.read_csv("/data/sample_submission.csv")
 sample_submission[classes] = y_test
 sample_submission.to_csv("/output/try.csv", index=False)
