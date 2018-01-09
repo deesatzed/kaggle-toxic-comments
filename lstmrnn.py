@@ -9,15 +9,19 @@ from keras.layers import Dense, Dropout, Embedding, Conv1D, MaxPooling1D, BatchN
 from keras.optimizers import Adam
 from keras.preprocessing import text, sequence
 from keras.callbacks import LearningRateScheduler, EarlyStopping, ModelCheckpoint
-
+import nltk
+nltk.download("stopwords")
+from nltk.corpus import stopwords
+import string
+stop = stopwords.words('english')
 EMBEDDING_FILE = '/out/data/glove.840B.300d.txt'
 train_file = "/data/train.csv"
 test_file = "/data/test.csv"
 classes = ["toxic", "severe_toxic", "obscene", "threat", "insult", "identity_hate"]
 train = pd.read_csv(train_file)
 test = pd.read_csv(test_file)
-traintext = train['comment_text'].fillna("_na_")
-testtext = train['comment_text'].fillna("_na_")
+traintext = train['comment_text'].fillna("_na_").apply(lambda x: ' '.join([word for word in x.split() if word not in (stop)]))
+testtext = train['comment_text'].fillna("_na_").apply(lambda x: ' '.join([word for word in x.split() if word not in (stop)]))
 train_raw_text = train["comment_text"].fillna("_na_").values
 test_raw_text = test["comment_text"].fillna("_na_").values
 together = pd.concat([traintext,testtext]).values
