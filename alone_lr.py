@@ -57,6 +57,6 @@ def run(i):
     submission = pd.DataFrame.from_dict(predictions)
     submission.to_csv('/output/submission{0}.csv'.format(i), index=False)
 i = 0
-while i<11:
+while i<5:
     run(i)
     i = i + 1
